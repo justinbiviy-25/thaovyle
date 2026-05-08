@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra dữ liệu đặt tour</title>
+    <style>
+        .error { color: red; margin-bottom: 10px; }
+        .success { color: green; font-weight: bold; }
+        form { width: 300px; background: #f9f9f9; padding: 20px; border: 1px solid #ccc; }
+        input, select { width: 100%; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Form Đặt Tour</h2>
+    <form action="" method="POST">
+        Họ tên: <input type="text" name="hoten">
+        Số điện thoại: <input type="text" name="sdt">
+        Email: <input type="text" name="email">
+        Điểm đến: 
+        <select name="diemden">
+            <option value="">--Chọn điểm đến--</option>
+            <option value="Hà Nội">Hà Nội</option>
+            <option value="Sapa">Sapa</option>
+            <option value="Nha Trang">Nha Trang</option>
+        </select>
+        Số người: <input type="number" name="songuoi">
+        <button type="submit" name="submit">Đặt tour</button>
+    </form>
+
+    <?php
+    if (isset($_POST['submit'])) {
+        $errors = [];
+        
+        $hoten = trim($_POST['hoten']);
+        $sdt = trim($_POST['sdt']);
+        $email = trim($_POST['email']);
+        $diemden = $_POST['diemden'];
+        $songuoi = $_POST['songuoi'];
+
+ 
+        if (empty($hoten)) $errors[] = "Họ tên không được rỗng.";
+        if (empty($sdt)) $errors[] = "Số điện thoại không được rỗng.";
+        if (empty($email)) $errors[] = "Email không được rỗng.";
+        if (empty($diemden)) $errors[] = "Phải chọn điểm đến.";
+        if (!is_numeric($songuoi) || $songuoi <= 0) $errors[] = "Số người phải là số và lớn hơn 0.";
+
+
+        if (!empty($errors)) {
+            echo "<div class='error'><ul>";
+            foreach ($errors as $err) echo "<li>$err</li>";
+            echo "</ul></div>";
+        } else {
+            echo "<p class='success'>Đặt tour thành công!</p>";
+        }
+    }
+    ?>
+</body>
+</html>
