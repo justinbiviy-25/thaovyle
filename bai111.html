@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Tour Cơ Bản</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+        form { max-width: 400px; background: #f4f4f4; padding: 20px; border-radius: 8px; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; }
+        input[type="text"], input[type="number"], select { width: 100%; padding: 8px; margin-top: 5px; }
+        button { background: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #218838; }
+        .result { margin-top: 20px; padding: 15px; border: 1px solid #ddd; background: #e9f7ef; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+    <h2>Form Đặt Tour Cơ Bản</h2>
+
+    <form action="bai4_form_coban.php" method="POST">
+        <div class="input-group">
+            <label for="fullname">Họ tên:</label>
+            <input type="text" name="fullname" id="fullname" required placeholder="Nhập họ tên của bạn">
+        </div>
+
+        <div class="input-group">
+            <label for="destination">Điểm đến:</label>
+            <select name="destination" id="destination">
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Phú Quốc">Phú Quốc</option>
+                <option value="Hà Giang">Hà Giang</option>
+                <option value="Đà Lạt">Đà Lạt</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="people_count">Số người:</label>
+            <input type="number" name="people_count" id="people_count" min="1" required>
+        </div>
+
+        <button type="submit" name="btn_dat_tour">Đặt tour</button>
+    </form>
+
+    <?php
+  
+    if (isset($_POST['btn_dat_tour'])) {
+ 
+        $fullname = htmlspecialchars($_POST['fullname']);
+        $destination = htmlspecialchars($_POST['destination']);
+        $people_count = htmlspecialchars($_POST['people_count']);
+
+    
+        echo "<div class='result'>";
+        echo "<h3>Thông tin đặt tour của bạn:</h3>";
+        echo "<p><strong>Họ tên khách hàng:</strong> $fullname</p>";
+        echo "<p><strong>Điểm đến:</strong> $destination</p>";
+        echo "<p><strong>Số người:</strong> $people_count</p>";
+        echo "</div>";
+    }
+    ?>
+
+</body>
+</html>
